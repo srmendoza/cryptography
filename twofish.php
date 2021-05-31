@@ -124,7 +124,6 @@ class twofish
 
 	private function qp($n, &$x)
 	{
-		$a0; $a1; $a2; $a3; $a4; $b0; $b1; $b2; $b3; $b4;
 		$a0 = $x >> 4;
 		$b0 = $x & 15;
 		$a1 = $a0 ^ $b0;
@@ -141,14 +140,14 @@ class twofish
 	private function g0_fun($x) 
 	{
 		//($this->m_tab[0][$this->sb[0][$this->extract_byte($x,0)]] ^ $this->m_tab[1][$this->sb[1][$this->extract_byte($x,1)]] ^ $this->m_tab[2][$this->sb[2][$this->extract_byte($x,2)]] ^ $this->m_tab[3][$sb[3][$this->extract_byte($x,3)]]);
-		//return $this->mk_tab[0 + 4*$this->extract_byte(x,0)] ^ $this->mk_tab[1 + 4*$this->extract_byte(x,1)] ^ $this->mk_tab[2 + 4*$this->extract_byte(x,2)] ^ $this->mk_tab[3 + 4*$this->extract_byte(x,3)] 
+		//return $this->mk_tab[0 + 4*$this->extract_byte($x,0)] ^ $this->mk_tab[1 + 4*$this->extract_byte($x,1)] ^ $this->mk_tab[2 + 4*$this->extract_byte($x,2)] ^ $this->mk_tab[3 + 4*$this->extract_byte($x,3)] 
 		return $this->h_fun($instance, $x, $instance->s_key);
 	}
 
 	private function g1_fun($x)
 	{
 		//($this->m_tab[0][$this->sb[0][$this->extract_byte($x,3)]] ^ $this->m_tab[1][$this->sb[1][$this->extract_byte($x,0)]]^ $this->m_tab[2][$this->sb[2][$this->extract_byte($x,1)]] ^ $this->m_tab[3][$sb[3][$this->extract_byte($x,2)]]);
-		//return mk_tab[0 + 4*extract_byte(x,3)] ^ mk_tab[1 + 4*extract_byte(x,0)] ^ mk_tab[2 + 4*extract_byte(x,1)] ^ mk_tab[3 + 4*extract_byte(x,2)] 
+		//return mk_tab[0 + 4*extract_byte($x,3)] ^ mk_tab[1 + 4*extract_byte($x,0)] ^ mk_tab[2 + 4*extract_byte($x,1)] ^ mk_tab[3 + 4*extract_byte($x,2)] 
 		return $this->h_fun($instance, $this->rotl($x,8), $instance->s_key);
 	}
 
@@ -182,7 +181,6 @@ class twofish
 
 	private function h_fun(&$instance, &$x, &$key)
 	{
-		$b0; $b1; $b2; $b3;
 		$b0 = $this->extract_byte($x, 0);
 		$b1 = $this->extract_byte($x, 1);
 		$b2 = $this->extract_byte($x, 2);
@@ -286,13 +284,13 @@ class twofish
 			$u = ($t << 1);
 			if($t & 0x80)
 			{
-				$u ^= $this->G_MOD;
+				$u ^= $self::G_MOD;
 			}
 			$p1 ^= $t ^ ($u << 16);
 			$u ^= ($t >> 1);
 			if($t & 0x01)
 			{
-				$u ^= $this->G_MOD >> 1;
+				$u ^= $self::G_MOD >> 1;
 			}
 			$p1 ^= ($u << 24) | ($u << 8);
 		}
@@ -376,7 +374,7 @@ class twofish
 		return $l_key;
 	}
 
-	public function twofish_encrypt(&$instance, &$in_blk, $out_blk)
+	public function encrypt(&$instance, &$in_blk, $out_blk)
 	{
 		$t0; $t1;
 		$blk = [];
@@ -405,7 +403,7 @@ class twofish
 		return $out_blk;
 	}
 
-	public function twofish_decrypt(&$instance, &$in_blk, $out_blk)
+	public function decrypt(&$instance, &$in_blk, $out_blk)
 	{
 		$t0; $t1;
 		$blk = [];

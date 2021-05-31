@@ -1,17 +1,8 @@
 <?php
 declare(strict_types=1);
 
-class paillier
+class salsa20
 {
-	private $base;
-	private $public;
-	private $private;
-
-	public function base()
-	{
-
-	}
-	
 	public function encrypt()
 	{
 	
@@ -20,5 +11,6 @@ class paillier
 	public function decrypt()
 	{
 	
+	}
 }
 ?>

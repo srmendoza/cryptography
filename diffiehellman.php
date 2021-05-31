@@ -3,41 +3,60 @@ declare(strict_types=1);
 
 class diffiehellman
 {
+	private $base;
+	private $public;
+	private $private;
+
 	public function base()
 	{
-		//prime()
+
 	}
 
 	public function privada()
 	{
 
 	}
+	
+	public function publica()
+	{
+	
+	}
+	
+	public function encrypt()
+	{
+	
+	}
+	
+	public function decrypt()
+	{
+	
+	}
 }
 
 /*
 private void button1_Click_1(object sender, EventArgs e)
 {
-	bob.Text = expmod(double.Parse(gru.Text), long.Parse(a.Text), double.Parse(p.Text)).ToString();
+	bob.Text = expmod(gru.Text, a.Text, p.Text);
 }
 
 private void button2_Click_1(object sender, EventArgs e)
 {
-	eve.Text = expmod(double.Parse(gru.Text), long.Parse(b.Text), double.Parse(p.Text)).ToString();
+	eve.Text = expmod(gru.Text), b.Text), p.Text);
 }
 
 private void key1_Click(object sender, EventArgs e)
 {
-	Kf1.Text = expmod(double.Parse(eve.Text), long.Parse(a.Text), double.Parse(p.Text)).ToString();
+	Kf1.Text = expmod(eve.Text), a.Text), p.Text);
 }
 
 private void Key2_Click(object sender, EventArgs e)
 {
-	Kf2.Text = expmod(double.Parse(bob.Text), long.Parse(b.Text), double.Parse(p.Text)).ToString();
+	Kf2.Text = expmod(bob.Text, b.Text, p.Text);
 }
 
 private void generador_Click(object sender, EventArgs e)
 {
-	p.Text = prime(long.Parse(p.Text)).ToString();
+	p.Text = prime(p.Text));
 }
 */
 ?>

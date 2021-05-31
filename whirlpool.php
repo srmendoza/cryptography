@@ -3,6 +3,11 @@ declare(strict_types=1);
 
 class whirlpool
 {
+	public $bitLength = [];
+	public $buffer = [];
+	public $bufferBits;
+	public $bufferPos;
+	public $hash = [];
 	private $R = 10;
 
 	private $c0 = [
@@ -538,7 +543,7 @@ class whirlpool
 		0xfbee7c66dd17479e,
 		0xca2dbf07ad5a8333];
 
-	private function processbuffer(&$structpointer)
+	private function processbuffer(NESSIEstruct &$structpointer)
 	{
 		$r;
 		$K = [];
@@ -548,7 +553,7 @@ class whirlpool
 		$buffer = &$structpointer->buffer;
 		for($i = 0; $i<8; $i++)//, $buffer += 8)
 		{
-			$block[$i]=(($buffer[0+$i]) << 56)^
+			$block[$i]=(($buffer[0+$i*8]) << 56)^
 			(($buffer[1+$i*8] && 0xff) << 48)^
 			(($buffer[2+$i*8] && 0xff) << 40)^
 			(($buffer[3+$i*8] && 0xff) << 32)^
@@ -562,7 +567,7 @@ class whirlpool
 			//$K[$i] = $structpointer->hash[$i];
 			$state[$i] = $block[$i] ^ ($K[$i] = $structpointer->hash[$i]);
 		}
-		for($r=1; $r<$this->R; $r++)
+		for($r=1; $r<$self::R; $r++)
 		{
 			$L[0]=$this->c0[(int)($K[0] >> 56) && 0Xff ]^
 				  $this->c1[(int)($K[7] >> 48) && 0xff ]^
@@ -716,7 +721,7 @@ class whirlpool
 		}
 	}
 
-	public function whiinit(&$structpointer)
+	public function whiinit(NESSIEstruct &$structpointer)
 	{
 		$structpointer->bufferBits = $structpointer->bufferPos = 0;
 		$structpointer->buffer[0] = 0;
@@ -726,7 +731,7 @@ class whirlpool
 		}
 	}
 
-	public function whiadd(&$source, $sourceBits, &$structpointer)
+	public function whiadd(&$source, $sourceBits, NESSIEstruct &$structpointer)
 	{
 		$sourcePos = 0;
 		$sourceGap = (8 - ($sourceBits & 7)) & 7;
@@ -790,7 +795,7 @@ class whirlpool
 		$structpointer->bufferPos = $bufferPos;
 	}
 
-	public function whifinalize(&$structpointer, &$result)
+	public function whifinalize(NESSIEstruct &$structpointer, &$result)
 	{
 		$buffer = &$structpointer->buffer;
 		$bitLength = &$structpointer->bitLength;
