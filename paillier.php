@@ -9,16 +9,17 @@ class paillier
 
 	public function base()
 	{
-
+		
 	}
 	
 	public function encrypt()
 	{
-	
+		
 	}
 	
 	public function decrypt()
 	{
-	
+		
+	}
 }
 ?>

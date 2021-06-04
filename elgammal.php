@@ -25,5 +25,6 @@ class elgammal
 		//$s=$c1^$x;
 		//$s_inv;//$c1^($q-x);
 		//$m=$c2*$s_inv;
+	}
 }
 ?>

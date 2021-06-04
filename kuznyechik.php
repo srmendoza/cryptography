@@ -2448,7 +2448,7 @@ class kuznyechik
 			{
 				uint8_t s = S[j];
 				$v.ll[0] = $v.ll[1] = 0;
-				v.cc[i] = s;
+				v.cc[$i] = s;
 				$this->L(v.cc);
 				printf("{ 0x%016I64x, 0x%016I64x }", v.ll[0], v.ll[1]);
 				if(j === 255)
@@ -2456,25 +2456,25 @@ class kuznyechik
 				else
 				{
 					printf(", ");
-					if((j + 1) % 4 === 0)
+					if(($j + 1) % 4 === 0)
 					{
 						printf("\n\t\t");
 					}
 				}
 			}
-			if(i != 15)
+			if($i != 15)
 				printf(",");
 		}
 		printf("\n};");
 		printf("static const uint64_t $this->IT[16][256][2] = {\n");
-		for(int i = 0; i < 16; i++)
+		for($i = 0; $i < 16; $i++)
 		{
 			printf("\t{\n\t\t");
-			for(int j = 0; j < 256; j++)
+			for($j = 0; $j < 256; $j++)
 			{
-				uint8_t s = $this->IS[j];
+				uint8_t $s = $this->IS[$j];
 				v.ll[0] = v.ll[1] = 0;
-				v.cc[i] = s;
+				v.cc[$i] = $s;
 				$this->IL(v.cc);
 				printf("{ 0x%016I64x, 0x%016I64x }", v.ll[0], v.ll[1]);
 				if($j === 255)
@@ -2482,21 +2482,21 @@ class kuznyechik
 				else
 				{
 					printf(", ");
-					if((j + 1) % 4 === 0)
+					if(($j + 1) % 4 === 0)
 					{
 						printf("\n\t\t");
 					}
 				}
 			}
-			if(i != 15)
+			if($i != 15)
 				printf(",");
 		}
 		printf("\n};");
 		printf("static const uint64_t $this->C[32][2] = {\n");
-		for(int i = 0; i <= 32; i++)
+		for($i = 0; $i <= 32; $i++)
 		{
 			v.ll[0] = v.ll[1] = 0;
-			v.cc[15] = i;
+			v.cc[15] = $i;
 			$this->L(v.cc);
 			printf("{ 0x%016I64x, 0x%016I64x },\n", v.ll[0], v.ll[1]);
 		}

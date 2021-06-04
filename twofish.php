@@ -275,7 +275,8 @@ class twofish
 
 	private function mds_rem($p0, $p1)
 	{
-		$i; $u; $t;
+		$i;
+		$p1;
 		for($i = 0; $i<8; ++$i)
 		{
 			$t = $p1 >> 24;
@@ -376,8 +377,6 @@ class twofish
 
 	public function encrypt(&$instance, &$in_blk, $out_blk)
 	{
-		$t0; $t1;
-		$blk = [];
 		$l_key = &$instance->l_key;
 		$mk_tab = &$instance->mk_tab;
 		$blk[0] = $this->SWAP_32($in_blk[0]) ^ $l_key[0];

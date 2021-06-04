@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-class diffiehellman
+class ECDH
 {
 	private $base;
 	private $public;
